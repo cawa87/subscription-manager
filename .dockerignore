@@ -1,0 +1,12 @@
+node_modules
+dist
+build
+.output
+.nuxt
+.pnpm-store
+.DS_Store
+.env
+.env.*
+
+
+

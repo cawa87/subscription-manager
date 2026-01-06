@@ -1,0 +1,101 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+input CreateSourceInput {
+  category: String
+  contentType: String
+  enabled: Boolean! = true
+  fetchIntervalMinutes: Int! = 60
+  name: String!
+  type: String! = "rss"
+  url: String!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type Digest {
+  createdAt: DateTime!
+  date: String!
+  id: ID!
+  sectionsJson: String!
+  summary: String!
+  title: String!
+}
+
+type Item {
+  author: String
+  contentHtml: String
+  contentText: String
+  createdAt: DateTime!
+  hash: String
+  id: ID!
+  language: String
+  publishedAt: DateTime
+  sourceId: ID!
+  title: String!
+  url: String!
+}
+
+input ItemsFilterInput {
+  limit: Int! = 50
+  sourceId: ID
+}
+
+type Mutation {
+  createSource(input: CreateSourceInput!): Source!
+  deleteSource(id: ID!): Boolean!
+  fetchSourceNow(sourceId: ID!): Float!
+  runDailyDigest(date: String): Digest
+  seedMvpSources: Float!
+  summarizeItem(itemId: ID!): Summary
+  toggleSourceEnabled(id: ID!): Source
+  updateSource(input: UpdateSourceInput!): Source
+}
+
+type Query {
+  digest(date: String!): Digest
+  digests: [Digest!]!
+  item(id: ID!): Item
+  items(filters: ItemsFilterInput): [Item!]!
+  ping: String!
+  sources: [Source!]!
+  summary(itemId: ID!): Summary
+}
+
+type Source {
+  category: String
+  contentType: String
+  createdAt: DateTime!
+  enabled: Boolean!
+  fetchIntervalMinutes: Int!
+  id: ID!
+  lastFetchedAt: DateTime
+  name: String!
+  type: String!
+  url: String!
+}
+
+type Summary {
+  createdAt: DateTime!
+  id: ID!
+  itemId: ID!
+  keyPointsJson: String
+  model: String!
+  sentiment: String
+  summary: String!
+}
+
+input UpdateSourceInput {
+  category: String
+  contentType: String
+  enabled: Boolean
+  fetchIntervalMinutes: Int
+  id: ID!
+  name: String
+  type: String
+  url: String
+}

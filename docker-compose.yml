@@ -1,0 +1,29 @@
+services:
+  api:
+    build:
+      context: .
+      dockerfile: apps/api/Dockerfile
+    environment:
+      PORT: "3000"
+      DB_FILE: "/data/app.db"
+    ports:
+      - "3001:3000"
+    volumes:
+      - sqlite_data:/data
+
+  web:
+    build:
+      context: .
+      dockerfile: apps/web/Dockerfile
+    environment:
+      NUXT_PUBLIC_GRAPHQL_ENDPOINT: "http://localhost:3001/graphql"
+    ports:
+      - "3000:3000"
+    depends_on:
+      - api
+
+volumes:
+  sqlite_data:
+
+
+

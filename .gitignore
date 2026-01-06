@@ -1,0 +1,16 @@
+node_modules
+.DS_Store
+.env
+.env.*
+dist
+build
+.output
+.nuxt
+.next
+.turbo
+.cache
+.pnpm-store
+coverage
+
+
+
